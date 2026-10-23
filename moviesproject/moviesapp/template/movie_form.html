@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} | Lumière</title>
+    <link rel="stylesheet" href="{% static 'movie.css' %}">
+</head>
+<body>
+    <header class="header"><a href="{% url 'catalog' %}">Lumière</a></header>
+    <main class="page narrow-page">
+        <a class="back-link" href="{% url 'catalog' %}">← Voltar ao catálogo</a>
+        <h1>{{ page_title }}</h1>
+        <form method="post" class="movie-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+            <div class="form-field">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+            <div class="form-actions">
+                <button class="button button-primary" type="submit">Salvar filme</button>
+                <a class="button button-secondary" href="{% url 'catalog' %}">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

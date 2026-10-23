@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir filme | Lumière</title>
+    <link rel="stylesheet" href="{% static 'movie.css' %}">
+</head>
+<body>
+    <header class="header"><a href="{% url 'catalog' %}">Lumière</a></header>
+    <main class="page narrow-page">
+        <a class="back-link" href="{% url 'catalog' %}">← Voltar ao catálogo</a>
+        <h1>Excluir filme</h1>
+        <p>Tem certeza de que deseja excluir <strong>{{ movie.title }}</strong>?</p>
+        <form method="post" class="form-actions">
+            {% csrf_token %}
+            <button class="button button-danger" type="submit">Confirmar exclusão</button>
+            <a class="button button-secondary" href="{% url 'catalog' %}">Cancelar</a>
+        </form>
+    </main>
+</body>
+</html>
